@@ -19,7 +19,7 @@ mongo = PyMongo(app)
 @app.route("/get_tasks")
 def get_tasks():
     tasks = mongo.db.tasks.find()
-    return render_template("tasks.html", tasks=tasks)
+    return render_template("tasks.html", tasks=tasks) #the second tasks refer to mongo.db.tasks.find()
 
 
 #'__main__' is the name of the scope in which top-level code executes.
