@@ -82,7 +82,20 @@ def profile(username):
     #grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"] #get only username from db
-    return render_template("profile.html", username=username) #the second username is the one we defined in line 78
+
+    if session["user"]:
+        return render_template("profile.html", username=username) 
+    #the first username is the one we defined in profile.html
+    #the second username is the one we defined in line 78
+    return redirect(url_for("login"))
+
+
+@app.route("/logout")
+def logout():
+    #remote user from session cookies
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
     
 #'__main__' is the name of the scope in which top-level code executes.
 # A module’s __name__ is set equal to '__main__' when read from standard input, a script,
